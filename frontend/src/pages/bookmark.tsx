@@ -111,7 +111,6 @@ let Dashboard = (props: RouteComponentProps) => {
     ]);
     if (result.value) {
       const { value } = result;
-      console.log(value);
       editBookmark(refId, value[0], value[1]);
     }
   };
@@ -130,7 +129,6 @@ let Dashboard = (props: RouteComponentProps) => {
           resetForm({
             values: { title: "", url: "" },
           });
-          console.log(values);
           addBookmarkToDB(values.title, values.url, user);
         }}
       >
@@ -210,7 +208,6 @@ let Dashboard = (props: RouteComponentProps) => {
         </div>
       ) : (
         <ul style={{ padding: "0px" }}>
-          {/* {console.log(data)} */}
           {bookmarkData &&
             bookmarkData.data.getBookmark.map((bookmark, ind) => {
               return (
@@ -238,7 +235,6 @@ let Dashboard = (props: RouteComponentProps) => {
                     <IconButton
                       aria-label="Toggle swiss mode"
                       onClick={() => {
-                        console.log(bookmark.id);
                         handleEdit(bookmark.id);
                       }}
                     >

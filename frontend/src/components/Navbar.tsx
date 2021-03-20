@@ -1,6 +1,7 @@
 import { Link } from "gatsby";
 import React, { useContext, useEffect, useState } from "react";
-import { Flex, NavLink, Button } from "theme-ui";
+// import { Flex, NavLink, Button } from "theme-ui";
+import { Flex, NavLink, Button } from 'theme-ui';
 import logo from "../images/icon.png";
 import { swiss } from "@theme-ui/presets";
 import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -27,8 +28,6 @@ export const Navbar = () => {
       setAuthState(nextAuthState);
       setUserData(authData)
       state.addUser(authData?.username.toString())
-      console.log("authdata ==> ", authData);
-      console.log("user ==> ", state.user);
       if (authData !== undefined)
         sessionStorage.setItem("user", authData?.username);
       else

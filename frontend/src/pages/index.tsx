@@ -28,8 +28,6 @@ export default function Home() {
       setAuthState(nextAuthState);
       setUserData(authData)
       addUser(authData?.username.toString())
-      console.log("authdata ==> ", authData);
-      console.log("user ==> ", user);
       if (authData !== undefined)
         sessionStorage.setItem("user", authData?.username);
       else
@@ -63,7 +61,7 @@ export default function Home() {
         >
           An App for saving your bookmarks for free
         </p>
-        {!true ? (
+        {!user ? (
           <div style={{ textAlign: "center", marginTop: "50px" }}>
             <Button
               onClick={handleShow}
@@ -100,7 +98,6 @@ export default function Home() {
           </Button>
         </Modal.Footer>
       </Modal>
-      {console.log("USER FROM INDEX==>", user)}
     </div>
   );
 }

@@ -3,12 +3,38 @@ import * as appsync from '@aws-cdk/aws-appsync';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as ddb from '@aws-cdk/aws-dynamodb';
 import * as cognito from '@aws-cdk/aws-cognito';
+import * as s3 from '@aws-cdk/aws-s3';
+import * as cloudfront from '@aws-cdk/aws-cloudfront'
+import * as s3Deployment from '@aws-cdk/aws-s3-deployment';
 
 export class BookmarkAppServerStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
+
+    const bucket = new s3.Bucket(this, "BookmarkWebsiteBucket", {
+      publicReadAccess: true,
+      websiteIndexDocument: 'index.html'
+    })
+
+    new s3Deployment.BucketDeployment(this, "bucketDeployment", {
+      sources: [s3Deployment.Source.asset("../frontend/public")],
+      destinationBucket: bucket,
+    })
+
+    new cloudfront.CloudFrontWebDistribution(this, "DistributionForBookmark", {
+      originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: bucket
+          },
+          behaviors: [{
+            isDefaultBehavior: true
+          }]
+        }
+      ]
+    })
 
     const userPool = new cognito.UserPool(this, "BookmarkAppUserPool", {
       selfSignUpEnabled: true,
