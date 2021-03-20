@@ -1,0 +1,15 @@
+projects:
+  BookmarkGraphQlApi:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/API.ts
+        docsFilePath: src/graphql
+        region: us-east-2
+        apiId: f3qwcliaxbdo5a7jxqsvsbx2oa
+        maxDepth: 2
