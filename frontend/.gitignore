@@ -1,14 +1,4 @@
-*.js
-!jest.config.js
-*.d.ts
-node_modules
-
-# CDK asset staging directory
-.cdk.staging
-cdk.out
-.cache
-config.ts
-
+node_modules/
 .cache/
 public
 
@@ -30,11 +20,3 @@ amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
-
-package-lock.json
-yarn.lock
-
-local-aws-info.json
-local-env-info.json
-
-amplify
