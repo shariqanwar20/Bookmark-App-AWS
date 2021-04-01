@@ -13,28 +13,28 @@ export class BookmarkAppServerStack extends cdk.Stack {
 
     // The code that defines your stack goes here
 
-    // const bucket = new s3.Bucket(this, "BookmarkWebsiteBucket", {
-    //   publicReadAccess: true,
-    //   websiteIndexDocument: 'index.html'
-    // })
+    const bucket = new s3.Bucket(this, "BookmarkWebsiteBucket", {
+      publicReadAccess: true,
+      websiteIndexDocument: 'index.html'
+    })
 
-    // new s3Deployment.BucketDeployment(this, "bucketDeployment", {
-    //   sources: [s3Deployment.Source.asset("../frontend/public")],
-    //   destinationBucket: bucket,
-    // })
+    new s3Deployment.BucketDeployment(this, "bucketDeployment", {
+      sources: [s3Deployment.Source.asset("../frontend/public")],
+      destinationBucket: bucket,
+    })
 
-    // new cloudfront.CloudFrontWebDistribution(this, "DistributionForBookmark", {
-    //   originConfigs: [
-    //     {
-    //       s3OriginSource: {
-    //         s3BucketSource: bucket
-    //       },
-    //       behaviors: [{
-    //         isDefaultBehavior: true
-    //       }]
-    //     }
-    //   ]
-    // })
+    new cloudfront.CloudFrontWebDistribution(this, "DistributionForBookmark", {
+      originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: bucket
+          },
+          behaviors: [{
+            isDefaultBehavior: true
+          }]
+        }
+      ]
+    })
 
     const userPool = new cognito.UserPool(this, "BookmarkAppUserPool", {
       selfSignUpEnabled: true,
